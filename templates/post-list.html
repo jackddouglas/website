@@ -1,0 +1,56 @@
+<div class="post-list">
+  $for(posts)$
+  <div class="post-item">
+    <div class="post-header">
+      <span class="post-title" data-post-id="$url$">$title$</span>
+      <span class="post-date">$date$</span>
+    </div>
+    <div class="post-content" id="content-$url$" style="display: none;">
+      <div class="article-content">
+        $body$
+      </div>
+    </div>
+  </div>
+  $endfor$
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const postTitles = document.querySelectorAll('.post-title');
+
+    // Process all content divs to remove headers and unnecessary elements
+    document.querySelectorAll('.post-content').forEach(contentDiv => {
+      // Remove any header elements that might be in the content
+      const headers = contentDiv.querySelectorAll('header');
+      headers.forEach(header => header.remove());
+
+      // Remove any navigation elements
+      const navs = contentDiv.querySelectorAll('.nav');
+      navs.forEach(nav => nav.remove());
+
+      // If there are any main tags wrapping the content, unwrap them
+      const mains = contentDiv.querySelectorAll('main');
+      mains.forEach(main => {
+        const parent = main.parentNode;
+        while (main.firstChild) {
+          parent.insertBefore(main.firstChild, main);
+        }
+        parent.removeChild(main);
+      });
+    });
+
+    postTitles.forEach(title => {
+      title.addEventListener('click', function () {
+        const postId = this.getAttribute('data-post-id');
+        const contentDiv = document.getElementById('content-' + postId);
+
+        // Toggle the content visibility
+        if (contentDiv.style.display === 'none') {
+          contentDiv.style.display = 'block';
+        } else {
+          contentDiv.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

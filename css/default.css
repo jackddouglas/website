@@ -1,0 +1,122 @@
+html {
+  font-size: 62.5%;
+  background-color: #fff;
+  font-family: Helvetica Neue, Helvetica, sans-serif;
+}
+
+body {
+  font-size: 1.6rem;
+  color: #000;
+  margin: 0 2rem;
+  position: relative;
+}
+
+.nav {
+  text-align: left;
+  float: right;
+  margin: 4rem 2rem 0;
+  position: relative;
+  width: 200px;
+  right: 0;
+}
+
+header {
+  overflow: hidden;
+  margin-bottom: 30px;
+  width: 100%;
+  display: block;
+  clear: both;
+}
+
+main {
+  clear: both;
+  display: block;
+  margin-top: 20px;
+}
+
+.nav h2 {
+  font-weight: 800;
+  font-size: 1.2rem;
+  margin-top: -10px;
+}
+
+.nav h3 {
+  font-weight: 400;
+  font-size: 1.2rem;
+}
+
+.nav a {
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+.post-title a {
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+a:visited {
+  color: #777;
+}
+
+h1 {
+  font-size: 2.4rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+article .header {
+  font-size: 1.4rem;
+  font-style: italic;
+  color: #555;
+}
+
+/* Make images responsive */
+article img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Post list styling */
+.post-list {
+  width: 100%;
+  margin: 20px 0;
+}
+
+.post-item {
+  margin-bottom: 15px;
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+.post-title {
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.post-date {
+  color: #777;
+}
+
+.post-content {
+  margin-top: 10px;
+  padding: 15px;
+  width: 75%;
+}
