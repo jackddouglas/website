@@ -7,8 +7,12 @@ html {
 body {
   font-size: 1.6rem;
   color: #000;
-  margin: 0 2rem;
+  margin: 0 auto;
+  /* Changed from '0 2rem' to '0 auto' to center the body */
   position: relative;
+  max-width: 1000px;
+  padding: 0 2rem;
+  /* Added padding to maintain the spacing from the edges */
 }
 
 .nav {
@@ -119,4 +123,85 @@ article img {
   margin-top: 10px;
   padding: 15px;
   width: 75%;
+}
+
+/* Post content styling */
+.post-content {
+  margin-top: -10px;
+  padding: 15px;
+  width: 75%;
+  position: relative;
+  /* For positioning footnotes */
+}
+
+/* Footnotes styling for all screens */
+.footnotes {
+  margin-top: 2rem;
+  padding-top: 1rem;
+}
+
+/* Style the footnote references */
+a.footnote-ref {
+  text-decoration: none;
+  vertical-align: super;
+  font-size: smaller;
+  color: #000;
+  position: relative;
+  /* For positioning sidenotes */
+}
+
+/* Responsive footnotes - side by side on larger screens */
+@media screen and (min-width: 1024px) {
+  .post-content {
+    max-width: 700px;
+    margin-right: 300px;
+  }
+
+  /* Hide the original footnotes section */
+  .footnotes {
+    display: none;
+  }
+
+  /* Create sidenote style for larger screens */
+  .sidenote {
+    position: absolute;
+    right: -300px;
+    width: 280px;
+    font-size: 1.1rem;
+    line-height: 1.4;
+    color: #555;
+    padding-left: 1rem;
+    border-left: 1px solid #eee;
+    margin-top: 0;
+    z-index: 1;
+    /* Ensure proper stacking */
+  }
+
+  .sidenote p {
+    margin-top: 0;
+  }
+}
+
+/* Ensure footnotes display normally on smaller screens */
+@media screen and (max-width: 1023px) {
+  .footnotes {
+    display: block;
+    position: static;
+    width: auto;
+  }
+}
+
+/* Footnote tooltips for hover effect */
+.footnote-tooltip {
+  display: none;
+  position: absolute;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 4px;
+  max-width: 280px;
+  z-index: 100;
+  font-size: 1.4rem;
+  color: #555;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
