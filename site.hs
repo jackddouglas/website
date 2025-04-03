@@ -15,6 +15,10 @@ main = hakyll $ do
         route   idRoute
         compile compressCssCompiler
 
+    match "js/*" $ do
+        route   idRoute
+        compile copyFileCompiler
+
     match "posts/*" $ do
         route $ setExtension "html"
         compile $ pandocCompiler
@@ -44,3 +48,4 @@ postCtx =
     dateField "date" "%Y-%m-%d" `mappend`
     metadataField `mappend`
     defaultContext
+
