@@ -11,15 +11,18 @@ function updateClock() {
   const hourDegrees = ((hours + minutes / 60) / 12) * 360 - 90;
 
   // Apply rotations
-  document.querySelector('.second-hand').style.transform = 'translateX(0) rotate(' + secondDegrees + 'deg)';
-  document.querySelector('.minute-hand').style.transform = 'translateX(0) rotate(' + minuteDegrees + 'deg)';
-  document.querySelector('.hour-hand').style.transform = 'translateX(0) rotate(' + hourDegrees + 'deg)';
+  document.querySelector(".second-hand").style.transform =
+    "translateX(0) rotate(" + secondDegrees + "deg)";
+  document.querySelector(".minute-hand").style.transform =
+    "translateX(0) rotate(" + minuteDegrees + "deg)";
+  document.querySelector(".hour-hand").style.transform =
+    "translateX(0) rotate(" + hourDegrees + "deg)";
 }
 
 // Function to position sidenotes at the same vertical position as their references
 function repositionSidenotes() {
-  const footnoteRefs = document.querySelectorAll('a.footnote-ref');
-  const sidenotes = document.querySelectorAll('.sidenote');
+  const footnoteRefs = document.querySelectorAll("a.footnote-ref");
+  const sidenotes = document.querySelectorAll(".sidenote");
 
   if (footnoteRefs.length === sidenotes.length) {
     for (let i = 0; i < footnoteRefs.length; i++) {
@@ -27,12 +30,12 @@ function repositionSidenotes() {
       const sidenote = sidenotes[i];
       const container = sidenote.parentElement;
 
-      if (container && container.classList.contains('sidenote-container')) {
+      if (container && container.classList.contains("sidenote-container")) {
         const refRect = ref.getBoundingClientRect();
         const containerRect = container.getBoundingClientRect();
         const topPosition = refRect.top - containerRect.top;
 
-        sidenote.style.top = topPosition + 'px';
+        sidenote.style.top = topPosition + "px";
       }
     }
   }
@@ -40,25 +43,25 @@ function repositionSidenotes() {
 
 // Handle responsive footnotes
 function handleResponsiveFootnotes() {
-  const sidenotes = document.querySelectorAll('.sidenote');
-  const footnotes = document.querySelectorAll('.footnotes');
+  const sidenotes = document.querySelectorAll(".sidenote");
+  const footnotes = document.querySelectorAll(".footnotes");
 
   if (window.innerWidth >= 1024) {
     // Show sidenotes, hide footnotes
-    sidenotes.forEach(note => note.style.display = 'block');
-    footnotes.forEach(section => section.style.display = 'none');
+    sidenotes.forEach((note) => (note.style.display = "block"));
+    footnotes.forEach((section) => (section.style.display = "none"));
 
     // Reposition sidenotes
     repositionSidenotes();
   } else {
     // Hide sidenotes, show footnotes
-    sidenotes.forEach(note => note.style.display = 'none');
-    footnotes.forEach(section => section.style.display = 'block');
+    sidenotes.forEach((note) => (note.style.display = "none"));
+    footnotes.forEach((section) => (section.style.display = "block"));
   }
 }
 
 // Initialize when DOM is fully loaded
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("DOMContentLoaded", function () {
   // Update clock every second
   setInterval(updateClock, 1000);
 
@@ -66,15 +69,23 @@ document.addEventListener('DOMContentLoaded', function() {
   updateClock();
 
   // Handle window resize for responsive footnotes
-  window.addEventListener('resize', handleResponsiveFootnotes);
+  window.addEventListener("resize", handleResponsiveFootnotes);
 
   // Initial call to handle footnotes
   handleResponsiveFootnotes();
 
   // Call repositionSidenotes when images load, as they can affect layout
-  window.addEventListener('load', function () {
+  window.addEventListener("load", function () {
     if (window.innerWidth >= 1024) {
       repositionSidenotes();
     }
   });
+
+  // Set the header link to directly navigate to about.html
+  const nameHeaderLink = document.querySelector("header .nav a");
+  if (nameHeaderLink) {
+    nameHeaderLink.href = "/about.html";
+    // Make the entire header link look clickable
+    nameHeaderLink.style.cursor = "pointer";
+  }
 });

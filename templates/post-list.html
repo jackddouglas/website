@@ -6,32 +6,30 @@
       <span class="post-type">$if(type)$$type$$else$Article$endif$</span>
       <span class="post-date">$date$</span>
     </div>
-    <div class="post-content" id="content-$url$" style="display: none;">
-      <div class="article-content">
-        $body$
-      </div>
+    <div class="post-content" id="content-$url$" style="display: none">
+      <div class="article-content">$body$</div>
     </div>
   </div>
   $endfor$
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const postTitles = document.querySelectorAll('.post-title');
+  document.addEventListener("DOMContentLoaded", function () {
+    const postTitles = document.querySelectorAll(".post-title");
 
     // Process all content divs to remove headers and unnecessary elements
-    document.querySelectorAll('.post-content').forEach(contentDiv => {
+    document.querySelectorAll(".post-content").forEach((contentDiv) => {
       // Remove any header elements that might be in the content
-      const headers = contentDiv.querySelectorAll('header');
-      headers.forEach(header => header.remove());
+      const headers = contentDiv.querySelectorAll("header");
+      headers.forEach((header) => header.remove());
 
       // Remove any navigation elements
-      const navs = contentDiv.querySelectorAll('.nav');
-      navs.forEach(nav => nav.remove());
+      const navs = contentDiv.querySelectorAll(".nav");
+      navs.forEach((nav) => nav.remove());
 
       // If there are any main tags wrapping the content, unwrap them
-      const mains = contentDiv.querySelectorAll('main');
-      mains.forEach(main => {
+      const mains = contentDiv.querySelectorAll("main");
+      mains.forEach((main) => {
         const parent = main.parentNode;
         while (main.firstChild) {
           parent.insertBefore(main.firstChild, main);
@@ -40,62 +38,65 @@
       });
 
       // Process footnotes for responsive display
-      const footnotes = contentDiv.querySelector('.footnotes');
+      const footnotes = contentDiv.querySelector(".footnotes");
       if (footnotes) {
         // Add IDs to footnote references if they don't have them
-        contentDiv.querySelectorAll('a.footnote-ref').forEach((ref, index) => {
+        contentDiv.querySelectorAll("a.footnote-ref").forEach((ref, index) => {
           if (!ref.id) {
-            ref.id = 'fnref' + (index + 1);
+            ref.id = "fnref" + (index + 1);
           }
         });
 
         // Add IDs to footnote items if they don't have them
-        footnotes.querySelectorAll('li').forEach((item, index) => {
+        footnotes.querySelectorAll("li").forEach((item, index) => {
           if (!item.id) {
-            item.id = 'fn' + (index + 1);
+            item.id = "fn" + (index + 1);
           }
         });
       }
     });
 
-    postTitles.forEach(title => {
-      title.addEventListener('click', function () {
-        const postId = this.getAttribute('data-post-id');
-        const contentDiv = document.getElementById('content-' + postId);
+    postTitles.forEach((title) => {
+      title.addEventListener("click", function () {
+        const postId = this.getAttribute("data-post-id");
+        const contentDiv = document.getElementById("content-" + postId);
 
         // Toggle the content visibility
-        if (contentDiv.style.display === 'none') {
-          contentDiv.style.display = 'block';
+        if (contentDiv.style.display === "none") {
+          contentDiv.style.display = "block";
 
           // Create sidenotes for larger screens
           if (window.innerWidth >= 1024) {
             // Get all footnote references in this post
-            const footnoteRefs = contentDiv.querySelectorAll('a.footnote-ref');
+            const footnoteRefs = contentDiv.querySelectorAll("a.footnote-ref");
 
             // Create a container for all sidenotes
-            const sidenoteContainer = document.createElement('div');
-            sidenoteContainer.className = 'sidenote-container';
-            sidenoteContainer.style.position = 'relative';
+            const sidenoteContainer = document.createElement("div");
+            sidenoteContainer.className = "sidenote-container";
+            sidenoteContainer.style.position = "relative";
             contentDiv.appendChild(sidenoteContainer);
 
             // For each reference, create a sidenote
-            footnoteRefs.forEach(ref => {
+            footnoteRefs.forEach((ref) => {
               // Extract the footnote ID from the href
-              const footnoteId = ref.getAttribute('href').substring(1);
+              const footnoteId = ref.getAttribute("href").substring(1);
 
               // Find the corresponding footnote content
-              const footnote = contentDiv.querySelector('#' + footnoteId);
+              const footnote = contentDiv.querySelector("#" + footnoteId);
 
               if (footnote) {
                 // Create a sidenote element
-                const sidenote = document.createElement('div');
-                sidenote.className = 'sidenote';
+                const sidenote = document.createElement("div");
+                sidenote.className = "sidenote";
 
                 // Get the footnote content (excluding the backref)
                 const footnoteContent = footnote.innerHTML;
 
                 // Remove the backref from the content
-                const cleanContent = footnoteContent.replace(/<a class="footnote-back".*?<\/a>/, '');
+                const cleanContent = footnoteContent.replace(
+                  /<a class="footnote-back".*?<\/a>/,
+                  "",
+                );
 
                 // Set the sidenote content
                 sidenote.innerHTML = cleanContent;
@@ -108,19 +109,19 @@
                 const containerRect = sidenoteContainer.getBoundingClientRect();
                 const topPosition = refRect.top - containerRect.top;
 
-                sidenote.style.position = 'absolute';
-                sidenote.style.top = topPosition + 'px';
+                sidenote.style.position = "absolute";
+                sidenote.style.top = topPosition + "px";
               }
             });
 
             // Hide the original footnotes section
-            const footnotesSection = contentDiv.querySelector('.footnotes');
+            const footnotesSection = contentDiv.querySelector(".footnotes");
             if (footnotesSection) {
-              footnotesSection.style.display = 'none';
+              footnotesSection.style.display = "none";
             }
           }
         } else {
-          contentDiv.style.display = 'none';
+          contentDiv.style.display = "none";
         }
       });
     });
