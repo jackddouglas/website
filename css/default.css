@@ -20,8 +20,14 @@ header {
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 30px;
+  display: block;
   box-sizing: border-box;
   width: 100%;
+  overflow: hidden;
+  clear: both;
+  position: relative;
+  min-height: 120px;
 }
 
 main {
@@ -64,15 +70,6 @@ main {
   color: #c0bdbd !important;
 }
 
-header {
-  overflow: hidden;
-  margin-bottom: 30px;
-  display: block;
-  clear: both;
-  position: relative;
-  min-height: 120px;
-}
-
 main {
   clear: both;
   display: block;
@@ -100,11 +97,19 @@ a {
 .post-title a {
   font-size: 1.8rem;
   font-weight: 700;
-  text-transform: uppercase;
+  cursor: pointer;
 }
 
 h1 {
   font-size: 2.4rem;
+}
+
+h1.post-title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  color: #333333;
 }
 
 h2 {
@@ -138,14 +143,22 @@ article img {
   display: flex;
   justify-content: space-between;
   padding: 10px 0;
-  cursor: pointer;
 }
 
 .post-title {
   font-weight: 700;
   text-transform: uppercase;
-  cursor: pointer;
   flex: 2;
+  text-decoration: none;
+  color: #333333;
+}
+
+a.post-title:hover {
+  color: #555;
+}
+
+a.post-title:visited {
+  color: #333333;
 }
 
 .post-type {
@@ -248,30 +261,29 @@ a.footnote-ref {
   }
 }
 
-/* Fix navigation positioning on very small screens */
-@media screen and (max-width: 480px) {
+/* Fix navigation positioning and sizing on smaller screens */
+@media screen and (max-width: 768px) {
   header {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-  }
-
-  .analog-clock {
-    margin: 20px 0 0 0;
-    order: 1;
-  }
-
-  .nav {
-    float: none;
-    margin: 20px 0 0 0;
-    order: 2;
-    text-align: right;
-    position: static;
+    margin-bottom: -35px;
   }
 
   .nav h2 {
-    margin-top: -5px;
+    font-size: 3rem;
+  }
+
+  .nav a {
+    font-size: 3rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .nav h2 {
+    font-size: 2.5rem;
+    text-align: left;
+  }
+
+  .nav a {
+    font-size: 2.5rem;
   }
 
   .nav h3 {

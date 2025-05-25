@@ -1,24 +1,3 @@
-// Analog Clock Functionality
-function updateClock() {
-  const now = new Date();
-  const seconds = now.getSeconds();
-  const minutes = now.getMinutes();
-  const hours = now.getHours() % 12;
-
-  // Calculate rotation angles
-  const secondDegrees = (seconds / 60) * 360 - 90;
-  const minuteDegrees = ((minutes + seconds / 60) / 60) * 360 - 90;
-  const hourDegrees = ((hours + minutes / 60) / 12) * 360 - 90;
-
-  // Apply rotations
-  document.querySelector(".second-hand").style.transform =
-    "translateX(0) rotate(" + secondDegrees + "deg)";
-  document.querySelector(".minute-hand").style.transform =
-    "translateX(0) rotate(" + minuteDegrees + "deg)";
-  document.querySelector(".hour-hand").style.transform =
-    "translateX(0) rotate(" + hourDegrees + "deg)";
-}
-
 // Function to position sidenotes at the same vertical position as their references
 function repositionSidenotes() {
   const footnoteRefs = document.querySelectorAll("a.footnote-ref");
@@ -62,12 +41,6 @@ function handleResponsiveFootnotes() {
 
 // Initialize when DOM is fully loaded
 document.addEventListener("DOMContentLoaded", function () {
-  // Update clock every second
-  setInterval(updateClock, 1000);
-
-  // Initialize clock immediately
-  updateClock();
-
   // Handle window resize for responsive footnotes
   window.addEventListener("resize", handleResponsiveFootnotes);
 
@@ -80,12 +53,4 @@ document.addEventListener("DOMContentLoaded", function () {
       repositionSidenotes();
     }
   });
-
-  // Set the header link to directly navigate to about.html
-  const nameHeaderLink = document.querySelector("header .nav a");
-  if (nameHeaderLink) {
-    nameHeaderLink.href = "/about.html";
-    // Make the entire header link look clickable
-    nameHeaderLink.style.cursor = "pointer";
-  }
 });

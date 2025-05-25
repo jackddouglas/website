@@ -19,10 +19,7 @@
     <main role="main">
       <!-- <h1>Anatomy of a Societal Protocol, Introduction</h1> -->
       <article>
-  <header class="post-header">
-    <span class="post-type">Research Note</span>
-    <span class="post-date">2025-03-27</span>
-  </header>
+  <h1 class="post-title">Anatomy of a Societal Protocol, Introduction</h1>
   <section class="post-content"><p><em>Welcome to the beginning of my inquiry into the nature of contemporary societal technology. Alongside essays like this, I’ll publish investigations into various protocols—be they of the modern, technical kind, or architectural and biological kinds—in the interest of developing a rigorous pattern language with which to reinforce and ground my explorations.</em></p>
 <p>Protocols have served as the tapestry for social coordination since language enabled the first societies. Although social technology seems like a fairly recent invention, through-lines from the earliest formations of society to modern social structures imply a set of sacrosanct principles necessary for human coordination in any form. Once, that technology was language, now it is becoming digital networks. We are in a unique moment where these innovations have transcended our prior understanding of socio-technical relations, and technologists now seek ways to reintegrate these tools into a praxis for future human coordination. Like the scientists and theorists who worked to understand the nature of social organisation until now, we need a systematic and analytical framework for understanding how these new affordances might influence our relations of power, space, belief, and identity. Here, I aim to find the irreducible construction of social technology, understand why networked technologies have largely failed to conform, and how recent advancements aim to bridge the gap.</p>
 <h2 id="the-beginning-and-end-of-history">The Beginning and End of History</h2>
@@ -94,6 +91,60 @@
 </ol>
 </section></section>
 </article>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Process footnotes for responsive display
+    const postContent = document.querySelector(".post-content");
+    const footnotes = postContent.querySelector(".footnotes");
+
+    if (footnotes && window.innerWidth >= 1024) {
+      // Get all footnote references in this post
+      const footnoteRefs = postContent.querySelectorAll("a.footnote-ref");
+
+      // For each reference, create a sidenote
+      footnoteRefs.forEach((ref) => {
+        // Extract the footnote ID from the href
+        const footnoteId = ref.getAttribute("href").substring(1);
+
+        // Find the corresponding footnote content
+        const footnote = footnotes.querySelector("#" + footnoteId);
+
+        if (footnote) {
+          // Create a sidenote element
+          const sidenote = document.createElement("div");
+          sidenote.className = "sidenote";
+
+          // Get the footnote content (excluding the backref)
+          const footnoteContent = footnote.innerHTML;
+
+          // Remove the backref from the content
+          const cleanContent = footnoteContent.replace(
+            /<a class="footnote-back".*?<\/a>/,
+            "",
+          );
+
+          // Set the sidenote content
+          sidenote.innerHTML = cleanContent;
+
+          // Position the sidenote at the same vertical position as the reference
+          const refRect = ref.getBoundingClientRect();
+          const contentRect = postContent.getBoundingClientRect();
+          const topPosition = refRect.top - contentRect.top;
+
+          sidenote.style.position = "absolute";
+          sidenote.style.top = topPosition + "px";
+
+          // Add the sidenote to the post content
+          postContent.appendChild(sidenote);
+        }
+      });
+
+      // Hide the original footnotes section on larger screens
+      footnotes.style.display = "none";
+    }
+  });
+</script>
 
     </main>
 
