@@ -188,6 +188,27 @@ a.post-title:visited {
 .footnotes {
   margin-top: 2rem;
   padding-top: 1rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Ensure footnote content wraps properly */
+.footnotes ol,
+.footnotes li,
+.footnotes p {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Handle long URLs and code in footnotes */
+.footnotes code,
+.footnotes a {
+  word-break: break-all;
+  overflow-wrap: break-word;
 }
 
 /* Style the footnote references */
