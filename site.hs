@@ -1,13 +1,32 @@
 --------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
 
+import Data.List (isPrefixOf)
 import Data.Monoid (mappend)
 import Hakyll
 
 --------------------------------------------------------------------------------
+-- Function to convert Obsidian-style image links to standard markdown
+convertObsidianImages :: String -> String
+convertObsidianImages = convertImages
+  where
+    convertImages [] = []
+    convertImages ('!' : '[' : '[' : rest) =
+      let (filename, remaining) = span (/= ']') rest
+       in case remaining of
+            (']' : ']' : after) -> "![](attachments/" ++ filename ++ ")" ++ convertImages after
+            _ -> "![[" ++ convertImages rest
+    convertImages (c : cs) = c : convertImages cs
+
+-- Custom compiler for Obsidian markdown files
+obsidianCompiler :: Compiler (Item String)
+obsidianCompiler = do
+  body <- getResourceBody
+  renderPandoc (fmap convertObsidianImages body)
+
 main :: IO ()
 main = hakyll $ do
-  match "images/*" $ do
+  match "posts/attachments/*" $ do
     route idRoute
     compile copyFileCompiler
 
@@ -19,10 +38,10 @@ main = hakyll $ do
     route idRoute
     compile copyFileCompiler
 
-  match "posts/*" $ do
+  match "posts/*.md" $ do
     route $ setExtension "html"
     compile $
-      pandocCompiler
+      obsidianCompiler
         >>= loadAndApplyTemplate "templates/post.html" postCtx
         >>= loadAndApplyTemplate "templates/default.html" postCtx
         >>= relativizeUrls
@@ -30,7 +49,7 @@ main = hakyll $ do
   match "index.html" $ do
     route idRoute
     compile $ do
-      posts <- recentFirst =<< loadAll "posts/*"
+      posts <- recentFirst =<< loadAll "posts/*.md"
       let indexCtx =
             listField "posts" (postCtx `mappend` bodyField "body") (return posts)
               `mappend` defaultContext
