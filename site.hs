@@ -4,6 +4,7 @@
 import Data.List (isPrefixOf)
 import Data.Monoid (mappend)
 import Hakyll
+import Text.Pandoc.SideNote (usingSideNotes)
 
 --------------------------------------------------------------------------------
 -- Function to convert Obsidian-style image links to standard markdown
@@ -18,11 +19,14 @@ convertObsidianImages = convertImages
             _ -> "![[" ++ convertImages rest
     convertImages (c : cs) = c : convertImages cs
 
--- Custom compiler for Obsidian markdown files
+-- Custom compiler for Obsidian markdown files with sidenotes
 obsidianCompiler :: Compiler (Item String)
 obsidianCompiler = do
   body <- getResourceBody
-  renderPandoc (fmap convertObsidianImages body)
+  let processedBody = fmap convertObsidianImages body
+  pandocItem <- readPandocWith defaultHakyllReaderOptions processedBody
+  let processedPandoc = fmap usingSideNotes pandocItem
+  return $ writePandocWith defaultHakyllWriterOptions processedPandoc
 
 main :: IO ()
 main = hakyll $ do

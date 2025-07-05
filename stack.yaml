@@ -40,8 +40,8 @@ packages:
 # - git: https://github.com/commercialhaskell/stack.git
 #   commit: e7b331f14bcffb8367cd58fbfc8b40ec7642100a
 #
-# extra-deps: []
-
+extra-deps:
+  - pandoc-sidenote-0.23.0.0@sha256:11b3a4d28fb3d40e38fbd671589aa65da7493c0dfec52fd32f2dd34eed82e021,1643
 # Override default flag values for project packages and extra-deps
 # flags: {}
 
