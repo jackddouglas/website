@@ -73,22 +73,23 @@ html {
   font-family:
     et-book, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua",
     Georgia, serif;
+  height: 100%;
 }
 
 body {
-  width: 87.5%;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 12.5%;
+  padding: 0 2rem;
   font-size: 1.4rem;
   color: #111;
-  max-width: 1400px;
   counter-reset: sidenote-counter;
   position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 header {
-  max-width: 800px;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 30px;
@@ -102,35 +103,35 @@ header {
 }
 
 main {
-  max-width: 100%;
-  width: 100%;
+  width: 87.5%;
+  padding-left: 12.5%;
+  max-width: 1400px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 30vh;
 }
 
 .nav {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin: 4rem 0rem 0;
+  margin: 1rem 0rem 0;
   position: relative;
   width: 100%;
-  color: #c0bdbd;
 }
 
-.nav h2 {
-  font-weight: 950;
-  font-size: 4rem;
-  margin-top: -10px;
+.nav-center {
+  display: flex;
+  gap: 0.5rem;
 }
 
 .nav a {
-  font-weight: 600;
-  font-size: 4rem;
-  text-decoration: none;
-  color: #c0bdbd !important;
-}
-
-.nav a:visited {
-  color: #c0bdbd !important;
+  font-weight: 400;
+  font-size: 14pt;
+  color: #333333;
+  text-decoration: none !important;
 }
 
 .nav a:hover {
@@ -139,12 +140,6 @@ main {
 
 .nav a:active {
   color: #c0bdbd !important;
-}
-
-main {
-  clear: both;
-  display: block;
-  margin-top: 20px;
 }
 
 .link {
@@ -178,7 +173,6 @@ h1 {
 h1.post-title {
   font-size: 2.8rem;
   font-weight: 700;
-  text-transform: uppercase;
   margin-bottom: 1rem;
   color: #333333;
 }
@@ -203,7 +197,8 @@ article img {
 /* Post list styling */
 .post-list {
   width: 100%;
-  margin: 20px 0;
+  margin: 20px auto;
+  max-width: 900px;
 }
 
 .post-item {
@@ -213,13 +208,12 @@ article img {
 .post-header {
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
   padding: 10px 0;
 }
 
 .post-title {
   font-weight: 700;
-  text-transform: uppercase;
-  flex: 2;
   text-decoration: none;
   color: #333333;
 }
@@ -234,16 +228,17 @@ a.post-title:visited {
 
 .post-type {
   color: #555;
-  flex: 1;
   text-align: center;
+  font-size: 1.2rem;
   font-weight: 500;
   text-transform: uppercase;
 }
 
 .post-date {
   color: #777;
-  flex: 1;
+  font-size: 1.2rem;
   text-align: right;
+  font-family: "SF Mono";
 }
 
 /* Post content styling */
@@ -288,7 +283,7 @@ a.post-title:visited {
   .sidenote-number:after {
     display: none;
   }
-  
+
   .sidenote:before {
     display: none;
   }
