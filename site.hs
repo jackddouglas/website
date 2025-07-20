@@ -34,9 +34,13 @@ main = hakyll $ do
     route idRoute
     compile copyFileCompiler
 
-  match "css/*" $ do
+  match "css/*.css" $ do
     route idRoute
     compile compressCssCompiler
+
+  match "css/**" $ do
+    route idRoute
+    compile copyFileCompiler
 
   match "js/*" $ do
     route idRoute
@@ -47,7 +51,7 @@ main = hakyll $ do
     compile $
       obsidianCompiler
         >>= loadAndApplyTemplate "templates/post.html" postCtx
-        >>= loadAndApplyTemplate "templates/default.html" postCtx
+        >>= loadAndApplyTemplate "templates/post-default.html" postCtx
         >>= relativizeUrls
 
   match "index.html" $ do
@@ -60,7 +64,7 @@ main = hakyll $ do
 
       getResourceBody
         >>= applyAsTemplate indexCtx
-        >>= loadAndApplyTemplate "templates/default.html" indexCtx
+        >>= loadAndApplyTemplate "templates/index-default.html" indexCtx
         >>= relativizeUrls
 
   match "about.html" $ do
@@ -68,7 +72,7 @@ main = hakyll $ do
     compile $ do
       getResourceBody
         >>= applyAsTemplate defaultContext
-        >>= loadAndApplyTemplate "templates/default.html" defaultContext
+        >>= loadAndApplyTemplate "templates/about-default.html" defaultContext
         >>= relativizeUrls
 
   match "templates/*" $ compile templateBodyCompiler
