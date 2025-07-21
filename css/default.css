@@ -251,7 +251,7 @@ a.post-title:visited {
   max-width: 650px;
   text-align: justify;
   width: 100%;
-  transition: max-width 0.3s ease;
+  transition: max-width 0.8s ease;
 }
 
 /* Tufte-style sidenotes and margin notes */
@@ -473,6 +473,20 @@ label.margin-toggle:not(.sidenote-number) {
   font-size: 1.4rem;
   color: #555;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Page transition styles */
+main {
+  transition: opacity 0.8s ease-in-out;
+  opacity: 0;
+}
+
+main.fade-in {
+  opacity: 1;
+}
+
+main.fade-out {
+  opacity: 0;
 }
 
 /* Bio page layout and links styling */
