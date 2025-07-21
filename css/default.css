@@ -99,7 +99,7 @@ header {
   overflow: hidden;
   clear: both;
   position: relative;
-  min-height: 120px;
+  /* min-height: 120px; */
 }
 
 main {
@@ -247,7 +247,6 @@ a.post-title:visited {
 /* Post content styling */
 .post-content {
   margin-top: 10px;
-  padding: 15px;
   position: relative;
   max-width: 650px;
   text-align: justify;
@@ -330,6 +329,10 @@ label.margin-toggle:not(.sidenote-number) {
 
 /* Large screen layout for better centering */
 @media (min-width: 1401px) {
+  .post-title {
+    margin-left: -5%;
+  }
+
   .post-content {
     margin-left: -5%;
   }
@@ -385,6 +388,10 @@ label.margin-toggle:not(.sidenote-number) {
     width: 100vw;
     padding: 0 8%;
     box-sizing: border-box;
+  }
+
+  h2 {
+    font-size: 1.7rem;
   }
 
   .post-content {
