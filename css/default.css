@@ -133,14 +133,6 @@ main {
   text-decoration: none !important;
 }
 
-.nav a:hover {
-  color: #c0bdbd !important;
-}
-
-.nav a:active {
-  color: #c0bdbd !important;
-}
-
 .nav a.active {
   font-weight: bold;
   font-style: italic;
@@ -162,6 +154,12 @@ a {
   text-decoration: none;
   color: #333333;
   cursor: pointer;
+  padding: 2px;
+}
+
+a:hover {
+  background-color: #333;
+  color: #fff !important;
 }
 
 .post-title a {
@@ -335,7 +333,7 @@ label.margin-toggle:not(.sidenote-number) {
   .post-content {
     margin-left: -5%;
   }
-  
+
   .sidenote,
   .marginnote {
     margin-right: -65%;
