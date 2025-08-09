@@ -1,5 +1,5 @@
 (function () {
-  "use strict";
+  'use strict';
 
   let currentImageIndex = 0;
   let images = [];
@@ -22,15 +22,17 @@
 
     // Add scroll handler for navigation
     document.addEventListener('wheel', handleScroll, { passive: false });
-    document.addEventListener('touchstart', handleTouchStart, { passive: true });
+    document.addEventListener('touchstart', handleTouchStart, {
+      passive: true,
+    });
     document.addEventListener('touchmove', handleTouchMove, { passive: false });
 
     // Add keyboard navigation
     document.addEventListener('keydown', handleKeydown);
 
     // Prevent context menu on images
-    images.forEach(img => {
-      img.addEventListener('contextmenu', e => e.preventDefault());
+    images.forEach((img) => {
+      img.addEventListener('contextmenu', (e) => e.preventDefault());
     });
   }
 
